@@ -1,0 +1,113 @@
+{
+  "openapi": "3.0.0",
+  "servers": [
+    {
+      "description": "localhost",
+      "url": "http://localhost:8080"
+    }
+  ],
+  "info": {
+    "description": "Ejemplo de API en NodeJS",
+    "version": "1.0.0",
+    "title": "api-nodejs",
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "tags": [
+    {
+      "name": "health",
+      "description": "HealthCheck"
+    }
+  ],
+  "paths": {
+    "/health": {
+      "get": {
+        "tags": [
+          "health"
+        ],
+        "summary": "Servicio de HealthCheck",
+        "description": "Endpoint de estado de salud del servicio.\n",
+        "responses": {
+          "200": {
+            "description": "Servicio API-python iniciado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoggerHealthCheck"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "LoggerGeneral": {
+        "type": "object",
+        "required": [
+          "fecha"
+        ],
+        "properties": {
+          "fecha": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2021-08-29T09:12:33.001Z"
+          },
+          "nombre": {
+            "type": "string",
+            "example": "api-node"
+          },
+          "meta": {
+            "type": "object",
+            "properties": {
+              "branch": {
+                "type": "string",
+                "example": "master"
+              },
+              "version": {
+                "type": "string",
+                "example": "1.0"
+              }
+            }
+          }
+        }
+      },
+      "LoggerHealthCheck": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/LoggerGeneral"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "operacion": {
+                "type": "string",
+                "example": "HealthCheck"
+              },
+              "resultado": {
+                "type": "string",
+                "example": "ok"
+              },
+              "codigo": {
+                "type": "integer",
+                "example": 200
+              },
+              "mensaje": {
+                "type": "string",
+                "example": "Servico Api-Python iniciado"
+              },
+              "datos": {
+                "type": "object",
+                "example": {}
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
