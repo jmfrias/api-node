@@ -7,9 +7,7 @@ Nodejs
 La funcionalidad principal de esta api es que sirva para realizar pruebas de infraestructura, probar funcionalidades de pipelines, etc.
 
 ## Funcionalidad
-<p align=justify>
 Utiliza un archivo estático con nombres y edades de personas. Para reiniciarla a su estado inicial y borrar todas las modificaciones realizadas, basta con reiniciar el servicio de node en donde se encuentra corriendo.
-</p>
 
 Esta API permite hacer las siguientes operaciones:
 - Consulta de healthCheck
