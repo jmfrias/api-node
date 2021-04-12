@@ -110,7 +110,7 @@
           "personas"
         ],
         "summary": "Servicio para agregar personas",
-        "description": "Endpoint para agregar personas la aplicacion.\n",
+        "description": "Endpoint para agregar personas la aplicacion. \n- La persona que se desea agregar se pasa como request tal como se muestra debajo\n- No se puede agregar mas de una persona por peticion\n",
         "requestBody": {
           "description": "Datos de la persona a agregar",
           "required": true,
@@ -170,7 +170,7 @@
           "personas"
         ],
         "summary": "Servicio para modificar personas",
-        "description": "Endpoint para modificar atributos de las personas. \n",
+        "description": "Endpoint para modificar atributos de las personas. \n  - La persona que se quiere modificar se pasa como parametros ingresando nombre y/o edad (se debe de ingresar al menos uno). En caso de que el criterio de busqueda devuelva mas de un resultado posible, el servicio mostrara un mensaje para que se refina un poco mas las caracteristicas.\n  - Los datos nuevos se pasan como request body como se muestra en el ejemplo.\n  - No se puede modificar mas de una persona por peticion\n",
         "parameters": [
           {
             "in": "query",
@@ -258,7 +258,7 @@
           "personas"
         ],
         "summary": "Servicio para eliminar personas",
-        "description": "Consulta de personas en el servicio. Devuelve un array con las personas existentes en la aplicacion segun el criterio de busqueda pasado por parametro (nombre y/o edad) o el listado completo de personas si no se especifica ninguno.\n",
+        "description": "Enpoint para eliminar personas del servicio. \n- La persona que se quiere eliminar se pasa como parametros ingresando nombre y/o edad (se debe de ingresar al menos uno). En caso de que el criterio de busqueda devuelva mas de un resultado posible, el servicio mostrara un mensaje para que se refina un poco mas las caracteristicas.\n- No se puede eliminar mas de una persona por peticion\n",
         "parameters": [
           {
             "in": "query",
@@ -408,8 +408,8 @@
                 "example": "Servico api-node iniciado"
               },
               "datos": {
-                "type": "object",
-                "example": {}
+                "type": "string",
+                "example": []
               }
             }
           }
@@ -539,7 +539,7 @@
               },
               "datos": {
                 "type": "string",
-                "example": {}
+                "example": []
               }
             }
           }
@@ -571,7 +571,7 @@
               },
               "datos": {
                 "type": "string",
-                "example": {}
+                "example": []
               }
             }
           }
@@ -603,7 +603,7 @@
               },
               "datos": {
                 "type": "string",
-                "example": {}
+                "example": []
               }
             }
           }
@@ -635,7 +635,7 @@
               },
               "datos": {
                 "type": "string",
-                "example": {}
+                "example": []
               }
             }
           }
@@ -667,7 +667,7 @@
               },
               "datos": {
                 "type": "string",
-                "example": {}
+                "example": []
               }
             }
           }
@@ -699,7 +699,7 @@
               },
               "datos": {
                 "type": "string",
-                "example": {}
+                "example": []
               }
             }
           }
@@ -731,7 +731,7 @@
               },
               "datos": {
                 "type": "string",
-                "example": {}
+                "example": []
               }
             }
           }
@@ -763,7 +763,7 @@
               },
               "datos": {
                 "type": "string",
-                "example": {}
+                "example": []
               }
             }
           }
@@ -795,7 +795,7 @@
               },
               "datos": {
                 "type": "string",
-                "example": {}
+                "example": []
               }
             }
           }
@@ -827,7 +827,7 @@
               },
               "datos": {
                 "type": "string",
-                "example": {}
+                "example": []
               }
             }
           }
@@ -859,7 +859,7 @@
               },
               "datos": {
                 "type": "string",
-                "example": {}
+                "example": []
               }
             }
           }
@@ -891,7 +891,7 @@
               },
               "datos": {
                 "type": "string",
-                "example": {}
+                "example": []
               }
             }
           }
@@ -923,7 +923,7 @@
               },
               "datos": {
                 "type": "string",
-                "example": {}
+                "example": []
               }
             }
           }
@@ -955,7 +955,7 @@
               },
               "datos": {
                 "type": "string",
-                "example": {}
+                "example": []
               }
             }
           }
