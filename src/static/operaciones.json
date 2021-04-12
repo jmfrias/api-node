@@ -8,6 +8,7 @@
         "insertar" : "Agregar persona",
         "update" : "Actualizar persona",
         "eliminar" : "Eliminar persona",
+        "validar_request" :"Validacion de request",
         "validar_datos" :"Validacion de datos"
     }
 }

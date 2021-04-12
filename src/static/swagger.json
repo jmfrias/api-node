@@ -19,6 +19,10 @@
     {
       "name": "health",
       "description": "HealthCheck"
+    },
+    {
+      "name": "personas",
+      "description": "Personas"
     }
   ],
   "paths": {
@@ -42,10 +46,313 @@
           }
         }
       }
+    },
+    "/personas": {
+      "get": {
+        "tags": [
+          "personas"
+        ],
+        "summary": "Servicio de consulta de personas",
+        "description": "Consulta de personas en el servicio. Devuelve un array con las personas existentes en la aplicacion segun el criterio de busqueda pasado por parametro (nombre y/o edad) o el listado completo de personas si no se especifica ninguno.\n",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "nombre",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Nombre de la persona a buscar"
+          },
+          {
+            "in": "query",
+            "name": "edad",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Edad de la persona a buscar"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Personas encontradas",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoggerConsultaPersonaOK"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error de validacion de datos en los parametros. Consulte la key de mensajes para mas informacion",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoggerConsultaPersonaBadRequest"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No se encontraron personas",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoggerConsultaPersonaNotFound"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "personas"
+        ],
+        "summary": "Servicio para agregar personas",
+        "description": "Endpoint para agregar personas la aplicacion.\n",
+        "requestBody": {
+          "description": "Datos de la persona a agregar",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Persona"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Persona agregada",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoggerAgregarPersonaOK"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error de validacion de datos en los parametros. Consulte la key de mensajes para mas informacion",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoggerAgregarPersonaBadRequest"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Persona existente",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoggerAgregarPersonaConflicto"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Error desconocido. No se pudo agregar la persona",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoggerAgregarPersonaUnavailable"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "personas"
+        ],
+        "summary": "Servicio para modificar personas",
+        "description": "Endpoint para modificar atributos de las personas. \n",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "nombre",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Nombre de la persona a buscar"
+          },
+          {
+            "in": "query",
+            "name": "edad",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Edad de la persona a buscar"
+          }
+        ],
+        "requestBody": {
+          "description": "Datos de la persona a agregar",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Persona"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Persona modificada",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoggerModificarPersonaOK"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error de validacion de datos en los parametros. Consulte la key de mensajes para mas informacion",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoggerModificarPersonaBadRequest"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No se encontro la persona a modificar",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoggerModificarPersonaNotFound"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "No se pudo modificar la persona. Hay mas de una persona en la busqueda. Refinar criterio de busqueda",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoggerModificarPersonaConflicto"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Error desconocido. No se pudo agregar la persona",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoggerModificarPersonaUnavailable"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "personas"
+        ],
+        "summary": "Servicio para eliminar personas",
+        "description": "Consulta de personas en el servicio. Devuelve un array con las personas existentes en la aplicacion segun el criterio de busqueda pasado por parametro (nombre y/o edad) o el listado completo de personas si no se especifica ninguno.\n",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "nombre",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Nombre de la persona a eliminar"
+          },
+          {
+            "in": "query",
+            "name": "edad",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Edad de la persona a eliminar"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Persona eliminada",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoggerEliminarPersonaOK"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error de validacion de datos en los parametros. Consulte la key de mensajes para mas informacion",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoggerEliminarPersonaBadRequest"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No se encontro la persona a eliminar",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoggerEliminarPersonaNotFound"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "No se pudo eliminar la persona. Hay mas de una persona en la busqueda. Refinar criterio de busqueda",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoggerEliminarPersonaConflicto"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Error desconocido. No se pudo agregar la persona",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoggerEliminarPersonaUnavailable"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
+      "Persona": {
+        "type": "object",
+        "required": [
+          "nombre",
+          "edad"
+        ],
+        "properties": {
+          "nombre": {
+            "type": "string",
+            "description": "Nombre de la persona",
+            "example": "nombre de la persona"
+          },
+          "edad": {
+            "type": "integer",
+            "description": "Edad de la persona",
+            "example": 21
+          }
+        }
+      },
       "LoggerGeneral": {
         "type": "object",
         "required": [
@@ -98,10 +405,556 @@
               },
               "mensaje": {
                 "type": "string",
-                "example": "Servico Api-Python iniciado"
+                "example": "Servico api-node iniciado"
               },
               "datos": {
                 "type": "object",
+                "example": {}
+              }
+            }
+          }
+        ]
+      },
+      "LoggerConsultaPersonaOK": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/LoggerGeneral"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "operacion": {
+                "type": "string",
+                "example": "Consulta de personas"
+              },
+              "resultado": {
+                "type": "string",
+                "example": "ok"
+              },
+              "codigo": {
+                "type": "integer",
+                "example": 200
+              },
+              "mensaje": {
+                "type": "string",
+                "example": "Servico api-node iniciado"
+              },
+              "datos": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Persona"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "LoggerConsultaPersonaBadRequest": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/LoggerGeneral"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "operacion": {
+                "type": "string",
+                "example": "Consulta de personas"
+              },
+              "resultado": {
+                "type": "string",
+                "example": "error"
+              },
+              "codigo": {
+                "type": "integer",
+                "example": 400
+              },
+              "mensaje": {
+                "type": "string",
+                "example": "Mensaje de error correspondiente"
+              },
+              "datos": {
+                "type": "string",
+                "example": []
+              }
+            }
+          }
+        ]
+      },
+      "LoggerConsultaPersonaNotFound": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/LoggerGeneral"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "operacion": {
+                "type": "string",
+                "example": "Consulta de personas"
+              },
+              "resultado": {
+                "type": "string",
+                "example": "sin accion"
+              },
+              "codigo": {
+                "type": "integer",
+                "example": 404
+              },
+              "mensaje": {
+                "type": "string",
+                "example": "No se encontraron personas"
+              },
+              "datos": {
+                "type": "string",
+                "example": []
+              }
+            }
+          }
+        ]
+      },
+      "LoggerAgregarPersonaOK": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/LoggerGeneral"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "operacion": {
+                "type": "string",
+                "example": "Agregar persona"
+              },
+              "resultado": {
+                "type": "string",
+                "example": "ok"
+              },
+              "codigo": {
+                "type": "integer",
+                "example": 200
+              },
+              "mensaje": {
+                "type": "string",
+                "example": "Persona Agregada"
+              },
+              "datos": {
+                "type": "string",
+                "example": {}
+              }
+            }
+          }
+        ]
+      },
+      "LoggerAgregarPersonaBadRequest": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/LoggerGeneral"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "operacion": {
+                "type": "string",
+                "example": "Agregar persona"
+              },
+              "resultado": {
+                "type": "string",
+                "example": "error"
+              },
+              "codigo": {
+                "type": "integer",
+                "example": 400
+              },
+              "mensaje": {
+                "type": "string",
+                "example": "Mensaje de error correspondiente"
+              },
+              "datos": {
+                "type": "string",
+                "example": {}
+              }
+            }
+          }
+        ]
+      },
+      "LoggerAgregarPersonaConflicto": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/LoggerGeneral"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "operacion": {
+                "type": "string",
+                "example": "Agregar persona"
+              },
+              "resultado": {
+                "type": "string",
+                "example": "sin accion"
+              },
+              "codigo": {
+                "type": "integer",
+                "example": 200
+              },
+              "mensaje": {
+                "type": "string",
+                "example": "Persona Existente"
+              },
+              "datos": {
+                "type": "string",
+                "example": {}
+              }
+            }
+          }
+        ]
+      },
+      "LoggerAgregarPersonaUnavailable": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/LoggerGeneral"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "operacion": {
+                "type": "string",
+                "example": "Agregar persona"
+              },
+              "resultado": {
+                "type": "string",
+                "example": "error"
+              },
+              "codigo": {
+                "type": "integer",
+                "example": 503
+              },
+              "mensaje": {
+                "type": "string",
+                "example": "Error desconocido. No se pudo agregar la persona."
+              },
+              "datos": {
+                "type": "string",
+                "example": {}
+              }
+            }
+          }
+        ]
+      },
+      "LoggerModificarPersonaOK": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/LoggerGeneral"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "operacion": {
+                "type": "string",
+                "example": "Actualizar persona"
+              },
+              "resultado": {
+                "type": "string",
+                "example": "ok"
+              },
+              "codigo": {
+                "type": "integer",
+                "example": 200
+              },
+              "mensaje": {
+                "type": "string",
+                "example": "Persona actualizada"
+              },
+              "datos": {
+                "type": "string",
+                "example": {}
+              }
+            }
+          }
+        ]
+      },
+      "LoggerModificarPersonaBadRequest": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/LoggerGeneral"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "operacion": {
+                "type": "string",
+                "example": "Actualizar persona"
+              },
+              "resultado": {
+                "type": "string",
+                "example": "error"
+              },
+              "codigo": {
+                "type": "integer",
+                "example": 400
+              },
+              "mensaje": {
+                "type": "string",
+                "example": "Mensaje de error correspondiente"
+              },
+              "datos": {
+                "type": "string",
+                "example": {}
+              }
+            }
+          }
+        ]
+      },
+      "LoggerModificarPersonaNotFound": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/LoggerGeneral"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "operacion": {
+                "type": "string",
+                "example": "Actualizar persona"
+              },
+              "resultado": {
+                "type": "string",
+                "example": "sin accion"
+              },
+              "codigo": {
+                "type": "integer",
+                "example": 404
+              },
+              "mensaje": {
+                "type": "string",
+                "example": "No existe la persona"
+              },
+              "datos": {
+                "type": "string",
+                "example": {}
+              }
+            }
+          }
+        ]
+      },
+      "LoggerModificarPersonaConflicto": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/LoggerGeneral"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "operacion": {
+                "type": "string",
+                "example": "Actualizar persona"
+              },
+              "resultado": {
+                "type": "string",
+                "example": "error"
+              },
+              "codigo": {
+                "type": "integer",
+                "example": 409
+              },
+              "mensaje": {
+                "type": "string",
+                "example": "Hay mas de una persona en la busqueda. Refinar criterio de busqueda"
+              },
+              "datos": {
+                "type": "string",
+                "example": {}
+              }
+            }
+          }
+        ]
+      },
+      "LoggerModificarPersonaUnavailable": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/LoggerGeneral"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "operacion": {
+                "type": "string",
+                "example": "Actualizar persona"
+              },
+              "resultado": {
+                "type": "string",
+                "example": "error"
+              },
+              "codigo": {
+                "type": "integer",
+                "example": 503
+              },
+              "mensaje": {
+                "type": "string",
+                "example": "Error desconocido. No se pudo actualizar la persona."
+              },
+              "datos": {
+                "type": "string",
+                "example": {}
+              }
+            }
+          }
+        ]
+      },
+      "LoggerEliminarPersonaOK": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/LoggerGeneral"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "operacion": {
+                "type": "string",
+                "example": "Eliminar persona"
+              },
+              "resultado": {
+                "type": "string",
+                "example": "ok"
+              },
+              "codigo": {
+                "type": "integer",
+                "example": 200
+              },
+              "mensaje": {
+                "type": "string",
+                "example": "Persona eliminada"
+              },
+              "datos": {
+                "type": "string",
+                "example": {}
+              }
+            }
+          }
+        ]
+      },
+      "LoggerEliminarPersonaBadRequest": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/LoggerGeneral"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "operacion": {
+                "type": "string",
+                "example": "Eliminar persona"
+              },
+              "resultado": {
+                "type": "string",
+                "example": "error"
+              },
+              "codigo": {
+                "type": "integer",
+                "example": 400
+              },
+              "mensaje": {
+                "type": "string",
+                "example": "Mensaje de error correspondiente"
+              },
+              "datos": {
+                "type": "string",
+                "example": {}
+              }
+            }
+          }
+        ]
+      },
+      "LoggerEliminarPersonaNotFound": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/LoggerGeneral"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "operacion": {
+                "type": "string",
+                "example": "Eliminar persona"
+              },
+              "resultado": {
+                "type": "string",
+                "example": "sin accion"
+              },
+              "codigo": {
+                "type": "integer",
+                "example": 404
+              },
+              "mensaje": {
+                "type": "string",
+                "example": "No existe la persona"
+              },
+              "datos": {
+                "type": "string",
+                "example": {}
+              }
+            }
+          }
+        ]
+      },
+      "LoggerEliminarPersonaConflicto": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/LoggerGeneral"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "operacion": {
+                "type": "string",
+                "example": "Eliminar persona"
+              },
+              "resultado": {
+                "type": "string",
+                "example": "error"
+              },
+              "codigo": {
+                "type": "integer",
+                "example": 409
+              },
+              "mensaje": {
+                "type": "string",
+                "example": "Hay mas de una persona en la busqueda. Refinar criterio de busqueda"
+              },
+              "datos": {
+                "type": "string",
+                "example": {}
+              }
+            }
+          }
+        ]
+      },
+      "LoggerEliminarPersonaUnavailable": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/LoggerGeneral"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "operacion": {
+                "type": "string",
+                "example": "Eliminar persona"
+              },
+              "resultado": {
+                "type": "string",
+                "example": "error"
+              },
+              "codigo": {
+                "type": "integer",
+                "example": 503
+              },
+              "mensaje": {
+                "type": "string",
+                "example": "Error desconocido. No se pudo eliminar la persona."
+              },
+              "datos": {
+                "type": "string",
                 "example": {}
               }
             }

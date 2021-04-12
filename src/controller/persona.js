@@ -125,7 +125,7 @@ const insertarPersona = (req_persona) => {
             return logger(operaciones.insertar, resultado.ok, codigos.OK, mensajes.insertar.ok, {})
         
     } else
-        return logger(operaciones.insertar, resultado.sin_accion, busquedaPersona.codigo, mensajes.insertar.sin_accion, {})
+        return logger(operaciones.insertar, resultado.sin_accion, codigos.CONFLICT, mensajes.insertar.sin_accion, {})
 }
 
 const eliminarPersona = (req_persona) => {     
@@ -181,7 +181,12 @@ module.exports = {
 
         return logger(operaciones.inicio, resultado.ok, codigos.OK, mensajes.inicio.ok, {})
     },
-    consulta: (req_query) => {     
+    consulta: (req_query) => {
+        let validacionRequest = validaciones.validarRequest(operaciones.consulta, req_query, "parametro")
+
+        if ( validacionRequest.resultado != resultado.ok )
+            return logger(operaciones.consulta, validacionRequest.resultado, validacionRequest.codigo, validacionRequest.mensaje, {})
+
         const {nombre, edad} = req_query
         let req_persona = {}
 
@@ -198,15 +203,17 @@ module.exports = {
         else
             return consultaPersonas(req_persona)
     },
-    insert: (req_body) => {
-        const {nombre, edad} = req_body
-        let req_persona = {}
+    insert: (req_body) => {        
+        let validacionRequest = validaciones.validarRequest(operaciones.insertar, req_body, "body")
 
-        if (typeof nombre != undefined) 
-            req_persona['nombre'] = nombre
-        
-        if (typeof edad != undefined) 
-            req_persona['edad'] = edad
+        if ( validacionRequest.resultado != resultado.ok )
+            return logger(operaciones.insertar, validacionRequest.resultado, validacionRequest.codigo, validacionRequest.mensaje, {})
+
+        const {nombre, edad} = req_body
+        let req_persona = {
+            "nombre" : nombre,
+            "edad" : edad
+        }
 
         let validacionCampos = validaciones.validarCampos(req_persona)
 
@@ -216,7 +223,17 @@ module.exports = {
             return insertarPersona(req_persona)
     },
     update: (req_query, req_body) => {
-        let {nombre, edad} = req_query        
+        let validacionRequest = validaciones.validarRequest(operaciones.update, req_query, "parametro")
+
+        if ( validacionRequest.resultado != resultado.ok )
+            return logger(operaciones.update, validacionRequest.resultado, validacionRequest.codigo, validacionRequest.mensaje, {})
+
+        validacionRequest = validaciones.validarRequest(operaciones.update, req_body, "body")
+
+        if ( validacionRequest.resultado != resultado.ok )
+            return logger(operaciones.update, validacionRequest.resultado, validacionRequest.codigo, validacionRequest.mensaje, {})
+
+        let {nombre, edad} = req_query
         let req_persona = {}
 
         if (typeof nombre != undefined) 
@@ -228,7 +245,7 @@ module.exports = {
         let validacionCampos = validaciones.validarCampos(req_persona)
 
         if ( validacionCampos.resultado != resultado.ok )
-            return logger(operaciones.eliminar, validacionCampos.resultado, validacionCampos.codigo, validacionCampos.mensaje, {})
+            return logger(operaciones.update, validacionCampos.resultado, validacionCampos.codigo, validacionCampos.mensaje, {})
         
         let nuevos_datos = {}
 
@@ -241,11 +258,16 @@ module.exports = {
         validacionCampos = validaciones.validarCampos(nuevos_datos)
 
         if ( validacionCampos.resultado != resultado.ok )
-            return logger(operaciones.eliminar, validacionCampos.resultado, validacionCampos.codigo, validacionCampos.mensaje, {})
+            return logger(operaciones.update, validacionCampos.resultado, validacionCampos.codigo, validacionCampos.mensaje, {})
 
         return actualizarPersona(req_persona, nuevos_datos)
     },
     delete: (req_query) => {
+        let validacionRequest = validaciones.validarRequest(operaciones.eliminar, req_query, "parametro")
+
+        if ( validacionRequest.resultado != resultado.ok )
+            return logger(operaciones.eliminar, validacionRequest.resultado, validacionRequest.codigo, validacionRequest.mensaje, {})
+
         const {nombre, edad} = req_query
         let req_persona = {}
 

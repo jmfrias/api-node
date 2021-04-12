@@ -18,17 +18,17 @@
         "eliminar" : {
             "ok" : "Persona Eliminada",
             "sin_accion" : "No existe la persona",
-            "error" : "No se pudo eliminar la persona."
+            "error" : "Error desconocido. No se pudo eliminar la persona."
         },
         "insertar" : {
             "ok" : "Persona agregada",
             "sin_accion" : "Persona existente",
-            "error" : "No se pudo agregar la persona."
+            "error" : "Error desconocido. No se pudo agregar la persona."
         },
         "update" : {
             "ok" : "Persona actualizada",
             "sin_accion" : "No existe la persona",
-            "error" : "No se pudo actualizar la persona."
+            "error" : "Error desconocido. No se pudo actualizar la persona."
         }
     }
 }
