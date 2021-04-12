@@ -92,7 +92,8 @@ npm start
 
 Server started on port 8080
 ````
-Al iniciar, el servicio nos muestra que se hizo la carga de personas correctamente y tambien muestra el mensaje "Server started on port 8080", el valor del puerto debe coincidir con el definido en el archivo .env
+
+Al iniciar, el servicio nos muestra que se hizo la carga de personas correctamente y tambien muestra el mensaje "Server started on **port 8080**", el valor del puerto debe coincidir con el definido en el archivo .env
 
 ## Uso
 La aplicacion está integrada con Swagger para poder hacer pruebas. El mismo se accede mediante un navegador a las URLs:
@@ -117,3 +118,5 @@ Tambien se puede utilizar desde aplicaciones como postman y soapui o ejecutando 
 ── health
     └── GET /health --> Estado del servicio
 ````
+
+Fin del documento
