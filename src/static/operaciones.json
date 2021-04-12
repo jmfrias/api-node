@@ -1,3 +1,13 @@
 {
-    "healthcheck" : "HealthCheck"
+    "healthcheck" : "HealthCheck",
+    "personas" : {
+        "consulta" : "Consulta de persona",
+        "inicio" : "Carga de datos de personas",
+        "buscar" : "Busqueda de personas",
+        "buscar_posicion" : "Busqueda de posicion personas",
+        "insertar" : "Agregar persona",
+        "update" : "Actualizar persona",
+        "eliminar" : "Eliminar persona",
+        "validar_datos" :"Validacion de datos"
+    }
 }

@@ -1,0 +1,50 @@
+[
+    { 
+        "nombre" : "Roberto Mamani",
+        "edad" : 61
+    },
+    { 
+        "nombre" : "Agustin Silveira",
+        "edad" : 21
+    },
+    { 
+        "nombre" : "Marcelo Gonzalez",
+        "edad" : 36
+    },
+    { 
+        "nombre" : "Alberto Fernandez",
+        "edad" : 57
+    },
+    { 
+        "nombre" : "Mauricio Macri",
+        "edad" : 52
+    },
+    { 
+        "nombre" : "Jean Claude Van damme",
+        "edad" : 75
+    },
+    { 
+        "nombre" : "German Mendez",
+        "edad" : 28
+    },
+    { 
+        "nombre" : "Guido Mendez",
+        "edad" : 41
+    },
+    { 
+        "nombre" : "Carolina Frias",
+        "edad" : 28
+    },
+    { 
+        "nombre" : "Antonio Vazquez",
+        "edad" : 65
+    },
+    { 
+        "nombre" : "Jose Garcia",
+        "edad" : 78
+    },
+    { 
+        "nombre" : "Kate Rodriguez",
+        "edad" : 27
+    }
+]

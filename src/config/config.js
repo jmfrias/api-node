@@ -5,7 +5,6 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const dotenv = require('dotenv')
 const dotenvExpand = require('dotenv-expand')
-
 const env = dotenv.config()
 dotenvExpand(env)
 
@@ -20,6 +19,7 @@ app.use(bodyParser.urlencoded( {extended: false} ))
 app.use(bodyParser.json())
 
 app.use('/health', require('../routes/health'))
+app.use('/personas', require('../routes/persona'))
 app.use('/' || '/swagger', swaggerUI.serve, swaggerUI.setup(swaggerConfig))
 
 module.exports = app

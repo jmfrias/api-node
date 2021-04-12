@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon ./src/index.js",
     "start": "node ./src/index.js",
-    "test": "mocha ./src/test/health.js --exit"
+    "test": "mocha ./src/test/*.js --exit"
   },
   "author": "Juan Manuel Frias",
   "license": "ISC",
@@ -22,7 +22,7 @@
     "routes": "^2.1.0",
     "swagger-jsdoc": "^4.2.3",
     "swagger-ui-express": "^4.1.4",
-    "validator": "^13.1.17"
+    "validator": "^13.5.2"
   },
   "devDependencies": {
     "chai-http": "^4.3.0",

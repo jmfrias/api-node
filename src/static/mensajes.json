@@ -1,5 +1,34 @@
 {
-    "ok" : {
-        "healthcheck" : "Servicio ApiNode Iniciado"
+    "healthcheck" : {
+        "ok" : "Servicio ApiNode Iniciado"
+    },
+    "personas" : {
+        "consulta" : {
+            "ok" : "Personas encontradas",
+            "sin_accion" : "No se encontraron personas"
+        },
+        "inicio" : {
+            "ok" : "Carga de personas exitosa"
+        },
+        "buscar_posicion" : {
+            "ok" : "Posicion encontrada",
+            "sin_accion" : "No existe la persona",
+            "error" : "Hay mas de una persona en la busqueda. Refinar criterio de busqueda"
+        },
+        "eliminar" : {
+            "ok" : "Persona Eliminada",
+            "sin_accion" : "No existe la persona",
+            "error" : "No se pudo eliminar la persona."
+        },
+        "insertar" : {
+            "ok" : "Persona agregada",
+            "sin_accion" : "Persona existente",
+            "error" : "No se pudo agregar la persona."
+        },
+        "update" : {
+            "ok" : "Persona actualizada",
+            "sin_accion" : "No existe la persona",
+            "error" : "No se pudo actualizar la persona."
+        }
     }
 }
