@@ -132,7 +132,7 @@ Tambien se puede utilizar desde aplicaciones como postman y soapui o ejecutando 
 ### Endpoint healthcheck
 ````bash
 ── health
-    └── GET /health --> Estado del servicio
+    └── GET /health #--> Estado del servicio
 ````
 
 ## Tests Unitarios
