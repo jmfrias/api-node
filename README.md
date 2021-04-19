@@ -57,7 +57,6 @@ El codigo esta organizado de la siguiente manera:
 ## Ejecucion
 Una vez descargado podemos iniciar el servicio invocando alguno de los siguientes scripts:
 
-
 ````json
 "scripts": {
     "dev": "nodemon ./src/index.js", --> Para iniciar el servicio

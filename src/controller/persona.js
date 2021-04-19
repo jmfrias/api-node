@@ -108,7 +108,7 @@ const consultaPersonas = (req_persona) => {
         const busquedaPersona = buscarPersona(req_persona)
         return logger(operaciones.consulta, busquedaPersona.resultado, busquedaPersona.codigo, busquedaPersona.mensaje, busquedaPersona.datos)
     } else
-        return logger(operaciones.consulta, resultado.sin_accion, codigos.NOT_FOUND, mensajes.consulta.sin_accion, {})
+        return logger(operaciones.consulta, resultado.sin_accion, codigos.NOT_FOUND, mensajes.consulta.sin_accion, [])
 }
 
 const insertarPersona = (req_persona) => {
@@ -120,12 +120,12 @@ const insertarPersona = (req_persona) => {
         busquedaPersona = buscarPersona(req_persona)
 
         if (busquedaPersona.resultado == resultado.sin_accion)
-            return logger(operaciones.insertar, busquedaPersona.resultado, codigos.SERVICE_UNAVAILABLE, mensajes.insertar.error, {})
+            return logger(operaciones.insertar, busquedaPersona.resultado, codigos.SERVICE_UNAVAILABLE, mensajes.insertar.error, [])
         else 
-            return logger(operaciones.insertar, resultado.ok, codigos.OK, mensajes.insertar.ok, {})
+            return logger(operaciones.insertar, resultado.ok, codigos.OK, mensajes.insertar.ok, [])
         
     } else
-        return logger(operaciones.insertar, resultado.sin_accion, codigos.CONFLICT, mensajes.insertar.sin_accion, {})
+        return logger(operaciones.insertar, resultado.sin_accion, codigos.CONFLICT, mensajes.insertar.sin_accion, [])
 }
 
 const eliminarPersona = (req_persona) => {     
@@ -137,14 +137,14 @@ const eliminarPersona = (req_persona) => {
             busquedaPersona = buscarPersona(req_persona)
 
             if (busquedaPersona.resultado == resultado.sin_accion)
-                return logger(operaciones.eliminar, resultado.ok, codigos.OK, mensajes.eliminar.ok, {})
+                return logger(operaciones.eliminar, resultado.ok, codigos.OK, mensajes.eliminar.ok, [])
             else
-                return logger(operaciones.eliminar, resultado.error, codigos.SERVICE_UNAVAILABLE, mensajes.eliminar.error, {})
+                return logger(operaciones.eliminar, resultado.error, codigos.SERVICE_UNAVAILABLE, mensajes.eliminar.error, [])
             
         } else
-            return logger(operaciones.eliminar, busquedaPersona.resultado, busquedaPersona.codigo, busquedaPersona.mensaje, {})
+            return logger(operaciones.eliminar, busquedaPersona.resultado, busquedaPersona.codigo, busquedaPersona.mensaje, [])
     } else
-        return logger(operaciones.eliminar, resultado.sin_accion, codigos.NOT_FOUND, mensajes.eliminar.sin_accion, {})
+        return logger(operaciones.eliminar, resultado.sin_accion, codigos.NOT_FOUND, mensajes.eliminar.sin_accion, [])
 }
 
 const actualizarPersona = (req_persona, nuevos_datos) => {
@@ -163,13 +163,13 @@ const actualizarPersona = (req_persona, nuevos_datos) => {
             busquedaPersona = buscarPersona(nuevos_datos)
 
             if (busquedaPersona.resultado == resultado.sin_accion)
-                return logger(operaciones.update, resultado.error, codigos.SERVICE_UNAVAILABLE, mensajes.update.error, {})
+                return logger(operaciones.update, resultado.error, codigos.SERVICE_UNAVAILABLE, mensajes.update.error, [])
             else 
-                return logger(operaciones.update, resultado.ok, codigos.OK, mensajes.update.ok, {})
+                return logger(operaciones.update, resultado.ok, codigos.OK, mensajes.update.ok, [])
         } else
-            return logger(operaciones.update, resultado.sin_accion, busquedaPersona.codigo, busquedaPersona.mensaje, {})
+            return logger(operaciones.update, resultado.sin_accion, busquedaPersona.codigo, busquedaPersona.mensaje, [])
     } else
-        return logger(operaciones.update, resultado.sin_accion, codigos.NOT_FOUND, mensajes.update.sin_accion, {})
+        return logger(operaciones.update, resultado.sin_accion, codigos.NOT_FOUND, mensajes.update.sin_accion, [])
 }
 
 module.exports = {
@@ -179,13 +179,13 @@ module.exports = {
             listadoGeneralPersonas.push(new Persona(persona.nombre, persona.edad))
         }
 
-        return logger(operaciones.inicio, resultado.ok, codigos.OK, mensajes.inicio.ok, {})
+        return logger(operaciones.inicio, resultado.ok, codigos.OK, mensajes.inicio.ok, [])
     },
     consulta: (req_query) => {
         let validacionRequest = validaciones.validarRequest(operaciones.consulta, req_query, "parametro")
 
         if ( validacionRequest.resultado != resultado.ok )
-            return logger(operaciones.consulta, validacionRequest.resultado, validacionRequest.codigo, validacionRequest.mensaje, {})
+            return logger(operaciones.consulta, validacionRequest.resultado, validacionRequest.codigo, validacionRequest.mensaje, [])
 
         const {nombre, edad} = req_query
         let req_persona = {}
@@ -199,7 +199,7 @@ module.exports = {
         let validacionCampos = validaciones.validarCampos(req_persona)
 
         if ( validacionCampos.resultado != resultado.ok )
-            return logger(operaciones.consulta, validacionCampos.resultado, validacionCampos.codigo, validacionCampos.mensaje, {})
+            return logger(operaciones.consulta, validacionCampos.resultado, validacionCampos.codigo, validacionCampos.mensaje, [])
         else
             return consultaPersonas(req_persona)
     },
@@ -207,7 +207,7 @@ module.exports = {
         let validacionRequest = validaciones.validarRequest(operaciones.insertar, req_body, "body")
 
         if ( validacionRequest.resultado != resultado.ok )
-            return logger(operaciones.insertar, validacionRequest.resultado, validacionRequest.codigo, validacionRequest.mensaje, {})
+            return logger(operaciones.insertar, validacionRequest.resultado, validacionRequest.codigo, validacionRequest.mensaje, [])
 
         const {nombre, edad} = req_body
         let req_persona = {
@@ -218,7 +218,7 @@ module.exports = {
         let validacionCampos = validaciones.validarCampos(req_persona)
 
         if ( validacionCampos.resultado != resultado.ok )
-            return logger(operaciones.insertar, validacionCampos.resultado, validacionCampos.codigo, validacionCampos.mensaje, {})
+            return logger(operaciones.insertar, validacionCampos.resultado, validacionCampos.codigo, validacionCampos.mensaje, [])
         else
             return insertarPersona(req_persona)
     },
@@ -226,12 +226,12 @@ module.exports = {
         let validacionRequest = validaciones.validarRequest(operaciones.update, req_query, "parametro")
 
         if ( validacionRequest.resultado != resultado.ok )
-            return logger(operaciones.update, validacionRequest.resultado, validacionRequest.codigo, validacionRequest.mensaje, {})
+            return logger(operaciones.update, validacionRequest.resultado, validacionRequest.codigo, validacionRequest.mensaje, [])
 
         validacionRequest = validaciones.validarRequest(operaciones.update, req_body, "body")
 
         if ( validacionRequest.resultado != resultado.ok )
-            return logger(operaciones.update, validacionRequest.resultado, validacionRequest.codigo, validacionRequest.mensaje, {})
+            return logger(operaciones.update, validacionRequest.resultado, validacionRequest.codigo, validacionRequest.mensaje, [])
 
         let {nombre, edad} = req_query
         let req_persona = {}
@@ -245,7 +245,7 @@ module.exports = {
         let validacionCampos = validaciones.validarCampos(req_persona)
 
         if ( validacionCampos.resultado != resultado.ok )
-            return logger(operaciones.update, validacionCampos.resultado, validacionCampos.codigo, validacionCampos.mensaje, {})
+            return logger(operaciones.update, validacionCampos.resultado, validacionCampos.codigo, validacionCampos.mensaje, [])
         
         let nuevos_datos = {}
 
@@ -258,7 +258,7 @@ module.exports = {
         validacionCampos = validaciones.validarCampos(nuevos_datos)
 
         if ( validacionCampos.resultado != resultado.ok )
-            return logger(operaciones.update, validacionCampos.resultado, validacionCampos.codigo, validacionCampos.mensaje, {})
+            return logger(operaciones.update, validacionCampos.resultado, validacionCampos.codigo, validacionCampos.mensaje, [])
 
         return actualizarPersona(req_persona, nuevos_datos)
     },
@@ -266,7 +266,7 @@ module.exports = {
         let validacionRequest = validaciones.validarRequest(operaciones.eliminar, req_query, "parametro")
 
         if ( validacionRequest.resultado != resultado.ok )
-            return logger(operaciones.eliminar, validacionRequest.resultado, validacionRequest.codigo, validacionRequest.mensaje, {})
+            return logger(operaciones.eliminar, validacionRequest.resultado, validacionRequest.codigo, validacionRequest.mensaje, [])
 
         const {nombre, edad} = req_query
         let req_persona = {}
@@ -280,7 +280,7 @@ module.exports = {
         let validacionCampos = validaciones.validarCampos(req_persona)
 
         if ( validacionCampos.resultado != resultado.ok )
-            return logger(operaciones.eliminar, validacionCampos.resultado, validacionCampos.codigo, validacionCampos.mensaje, {})
+            return logger(operaciones.eliminar, validacionCampos.resultado, validacionCampos.codigo, validacionCampos.mensaje, [])
         else
             return eliminarPersona(req_persona)
     }

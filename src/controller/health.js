@@ -16,6 +16,6 @@ module.exports = {
             return logger(operaciones.healthcheck, resultado.error, codigos.INTERNAL_SERVER_ERROR , "Error en el servicio. " + err)
         }
         
-        return logger(operaciones.healthcheck, resultado.ok, codigos.OK,  health.getHealth(), {})
+        return logger(operaciones.healthcheck, resultado.ok, codigos.OK,  health.getHealth(), [])
     }
 }
