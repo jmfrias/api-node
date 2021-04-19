@@ -54,16 +54,35 @@ El codigo esta organizado de la siguiente manera:
         └── persona.js
 ````
 
-## Ejecucion
-Una vez descargado podemos iniciar el servicio invocando alguno de los siguientes scripts:
+## Instalacion
+Una vez descargado podemos instalamos las depedencias requeridas usando el comando npm install
+
+````bash
+npm install
+
+> nodemon@2.0.7 postinstall F:\Juancho\Repositorios\api-node\node_modules\nodemon
+````
+
+## Scripts
+Estan disponibiles los siguientes scripts
 
 ````json
 "scripts": {
-    "dev": "nodemon ./src/index.js", --> Para iniciar el servicio
-    "start": "node ./src/index.js", --> Para iniciar el servicio en modo desarrollador.
-    "test": "mocha ./src/test/*.js --exit" --> Para ejecutar los tests unitarios programados para la aplicacion
+    "dev": "nodemon ./src/index.js",
+    "start": "node ./src/index.js", 
+    "test": "mocha ./src/test/*.js --exit"
   }
 ````
+
+### Descripcion de cada script
+- dev: Inicia el servicio en modo desarrollador usando el modulo nodemon. Este reinicia el servicio de nodejs ante cualquier cambio en el codigo, siendo muy util para hacer pruebas locales.
+- start: Inicia el servicio de la aplicacion.
+- test: Ejecuta las pruebas unitarias configuradas utlizando los frameworks de mocha y chai
+
+## Ejecucion
+Para iniciar el servicio ejecutamos el script:
+- npm run dev
+- npm start
 
 Este serivcio no utiliza variables más allá del puerto de inicio, que en caso de no especificarse alguno, este iniciara en el puerto **3000** (Puerto por default de nodejs).
 
@@ -104,12 +123,10 @@ Tambien se puede utilizar desde aplicaciones como postman y soapui o ejecutando 
 ### Endpoint de personas
 ````bash
 ── personas
-    ├── GET /personas --> Consulta
-    ├── POST /personas --> Agregar 
-    ├── PATH /personas --> Modificar
-    └── DELETE /personas --> Eliminar
-── health (Servicio de healthcheck)
-    └── GET /health
+    ├── GET /personas #--> Consulta
+    ├── POST /personas #--> Agregar 
+    ├── PATH /personas #--> Modificar
+    └── DELETE /personas #--> Eliminar
 ````
 
 ### Endpoint healthcheck
@@ -117,5 +134,52 @@ Tambien se puede utilizar desde aplicaciones como postman y soapui o ejecutando 
 ── health
     └── GET /health --> Estado del servicio
 ````
+
+## Tests Unitarios
+Los tests estan dividos de la siguiente manera:
+````bash
+── personas
+    ├── Consulta de personas
+    ├── Agregar persona 
+    ├── Modificar persona
+    └── Eliminar persona
+── health (Servicio de healthcheck)
+    └── Consulta de healthcheck
+````
+
+Los modulos se encuntran en el directorio src/testhealth y persona.
+
+````bash
+── src
+    └── test
+        ├── health.js
+        └── persona.js
+````
+
+Para ejecutar los test invocamos el script definido en el package.json. El comando ejecuta todos los tests configurados para la api. 
+
+````bash
+npm run test
+
+TEST HealthCheck
+    GET /health
+    ✓ Devuele estado del servicio
+TEST PERSONA
+    GET personas
+    ✓ Devuele todas las personas
+    
+    POST persona
+    ✓ Agrego una persona
+    
+    UPDATE persona
+    ✓ Actualizo una persona
+    
+    DELETE persona
+    ✓ Elimino una persona
+
+5 passing (48ms)
+````
+
+Las 5 pruebas deben retornar el tilde para indicar que fueron satisfactorias.
 
 Fin del documento
