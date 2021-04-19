@@ -35,7 +35,7 @@
         "description": "Endpoint de estado de salud del servicio.\n",
         "responses": {
           "200": {
-            "description": "Servicio API-python iniciado",
+            "description": "Servicio api-node iniciado",
             "content": {
               "application/json": {
                 "schema": {
