@@ -1,0 +1,72 @@
+openapi: 3.0.0
+servers:
+  - description: localhost
+    url: http://localhost:8080
+info:
+  description: API example on Nodejs
+  version: 1.0.0
+  title: api-nodejs
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+tags:
+  - name: health
+    description: HealthCheck
+paths:
+  /health:
+    get:
+      tags:
+        - health
+      summary: Health check service
+      description: |
+        Endpoint for health check
+      responses:
+        '200':
+          description: Endpoint for health check
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoggerHealthCheck'
+components:
+  schemas:
+    LoggerGeneral:
+      type: object
+      required:
+        - fecha
+      properties:
+        date:
+          type: string
+          format: date-time
+          example: '2021-08-29T09:12:33.001Z'
+        name:
+          type: string
+          example: api-node
+        meta:
+          type: object
+          properties:
+            branch:
+              type: string
+              example: master
+            version:
+              type: string
+              example: '1.0'
+    LoggerHealthCheck:
+      allOf:
+        - $ref: '#/components/schemas/LoggerGeneral'
+        - type: object
+          properties:
+            operation:
+              type: string
+              example: HealthCheck
+            result:
+              type: string
+              example: ok
+            code:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: Service ApiNode started
+            data:
+              type: string
+              example: []
