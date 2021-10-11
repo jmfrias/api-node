@@ -30,7 +30,7 @@ The code is organized as:
     │   ├── messages.json
     │   ├── operations.json
     │   ├── results.json
-    │   └── swagger.yml    
+    │   └── swagger.yml
     └── test
         └── health.js
 ````
@@ -60,7 +60,7 @@ The following scripts are available:
 - start: Starts the application.
 - test: Executes unitary tests configured using frameworks mocha and chai.
 
-## Ejecucion
+## Execution
 To start the service we can execute:
 - npm run dev
 - npm start
