@@ -1,4 +1,4 @@
-FROM node:lts-alpine3.14
+FROM node:latest
 
 RUN mkdir /apinode
 
