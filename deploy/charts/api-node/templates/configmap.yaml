@@ -1,0 +1,10 @@
+{{ if .Values.configmapVariables }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "charts.fullname" . }}
+data:
+  {{- range $key, $value := .Values.configmapVariables }}
+  {{ $key | upper }}: {{ $value | quote }}
+  {{- end }}
+{{ end }}
